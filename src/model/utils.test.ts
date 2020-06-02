@@ -2,7 +2,7 @@ import {
   addDays, addDurations,
   convertDateTimeToDate,
   convertMapToArray, getActivitiesFromWeek,
-  getSunday, makeAverageDistance, makeAverageDuration,
+  getSunday, makeAverageDistance, makeAverageDuration, makeTotalDistance, makeTotalDuration,
   makeWeeks,
   newActivity,
   newDay,
@@ -106,15 +106,34 @@ test("makeAverageDistance", () => {
 });
 
 test("addDurations", () => {
-  expect(addDurations("01:10:23", "00:53:12")).toEqual("02:03:35");
+  expect(addDurations("01:10:23", "00:53:12"))
+    .toEqual("02:03:35");
 });
 
-test("makeAverageDuration", () => {
+// test("makeAverageDuration", () => {
+//   const activities = [
+//     newActivity({duration: "01:10:23"}),
+//     newActivity({duration: "00:53:12"})
+//   ];
+//   expect(makeAverageDuration(activities)).toEqual("01:01:37");
+// });
+
+test("makeTotalDistance", () => {
+  const activities = [
+    newActivity({distance: 23.12}),
+    newActivity({distance: 11}),
+    newActivity({distance: 3.3}),
+  ];
+  expect(makeTotalDistance()).toEqual(0);
+  expect(makeTotalDistance(activities)).toEqual(37.42);
+});
+
+test("makeTotalDuration", () => {
   const activities = [
     newActivity({duration: "01:10:23"}),
     newActivity({duration: "00:53:12"})
   ];
-  expect(makeAverageDuration(activities)).toEqual("01:01:37");
+  expect(makeTotalDuration(activities)).toEqual("02:03:35");
 });
 
 test("makeWeekSummary", () => {

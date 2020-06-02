@@ -4,5 +4,5 @@ export interface WeekSummary {
   averageDuration: string;
   distance: number;
   duration: string; // Moment.Duration or custom type?
-  weekStart: string;
+  startDate: string;
 }
