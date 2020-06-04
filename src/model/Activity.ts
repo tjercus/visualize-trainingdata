@@ -10,7 +10,13 @@ export enum ActivityState {
   SKIPPED
 }
 
-enum ActivityType {
+export enum ActivityType {
+  CYCLING = "Cycling",
+  RUNNING = "Running",
+  SWIMMING = "Swimming",
+}
+
+export enum TrainingType {
   EASY,
   INTERVAL,
   LONG,
@@ -35,6 +41,6 @@ export interface Activity {
   notes?: string;
   RPE?: number;
   state: ActivityState;
-  type?: ActivityType;
+  type: ActivityType;
   weekNr?: number;
 }

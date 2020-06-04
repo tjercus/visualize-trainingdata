@@ -5,10 +5,11 @@ const inputFilePath = "./data/runkeeper.csv";
 const outputFilePath = "./data/runkeeper.json";
 
 const config = {
-  noheader: false,
+  checkType: true,
   headers: ["id", "dateTime", "type", "route", "distance",
     "duration", "pace", "speed", "calories", "climb",
-    "heartRate", "friends", "notes", "gpx"]
+    "heartRate", "friends", "notes", "gpx"],
+  noheader: false,
 };
 
 parser(config)

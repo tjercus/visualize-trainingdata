@@ -2,13 +2,15 @@ import {
   addDays, addDurations,
   convertDateTimeToDate,
   convertMapToArray, getActivitiesFromWeek,
-  getSunday, makeAverageDistance, makeAverageDuration, makeTotalDistance, makeTotalDuration,
-  makeWeeks,
+  getSunday, makeAverageDistance, makeTotalDistance, makeTotalDuration,
+  makeWeeks, makeWeekSummary,
   newActivity,
   newDay,
-  newWeek
+  newWeek, padDuration
 } from "./utils";
 import {Activity} from "./Activity";
+
+import runkeeperActivities from "../model/data/runkeeper.json";
 
 // 23 may = zaterdag. It's sunday was 17 may
 // 24 may = zondag.   It's sunday was 24 may
@@ -85,6 +87,10 @@ test("convertMapToArray", () => {
   expect(arr).toEqual(["onevalue", "twovalue"]);
 });
 
+test("padDuration", () => {
+  expect(padDuration("53:41")).toEqual("00:53:41");
+});
+
 test("getActivitiesFromWeek", () => {
   const week = newWeek({startDate: "2020-05-15"});
   const dayOne = week.days.get("2020-05-15") || newDay();
@@ -102,7 +108,7 @@ test("makeAverageDistance", () => {
     newActivity({distance: 6.58})
   ];
   const average = makeAverageDistance(activities);
-  expect(average).toEqual(6.260000000000001);
+  expect(average).toEqual(6.26);
 });
 
 test("addDurations", () => {
@@ -134,10 +140,20 @@ test("makeTotalDuration", () => {
     newActivity({duration: "00:53:12"})
   ];
   expect(makeTotalDuration(activities)).toEqual("02:03:35");
+  const moreActivities = [
+    newActivity({duration: "52:10"}),
+    newActivity({duration: "01:01:01"})
+  ];
+  expect(makeTotalDuration(moreActivities)).toEqual("01:53:11");
+  const evenMoreActivities = [
+    newActivity({duration: "52:10"}),
+    newActivity({duration: "1:01:01"})
+  ];
+  expect(makeTotalDuration(evenMoreActivities)).toEqual("01:53:11");
 });
 
 test("makeWeekSummary", () => {
-  const activities: Array<Activity> = [];
-  const weeks = makeWeeks(activities);
-
+  console.log(runkeeperActivities);
+  const weeks = makeWeeks(runkeeperActivities);
+  convertMapToArray(weeks).map(week => console.log(makeWeekSummary(week)));
 });
