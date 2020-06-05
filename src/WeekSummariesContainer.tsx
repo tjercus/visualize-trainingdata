@@ -1,12 +1,13 @@
 import React, {FunctionComponent, useEffect} from "react";
 import WeekSummariesView from "./WeekSummariesView";
-import {getWeekSummaries} from "./model/dataService";
+import dataService from "./model/";
 
 const WeekSummariesContainer: FunctionComponent = () => {
 
-  // useEffect(() => getWeekSummaries(), [])
+  // TODO use state when the user can pass filters/sorters to the service
+  //useEffect(() => getWeekSummaries(), [])
 
-  return (<WeekSummariesView weekSummaries={[]} />);
+  return (<WeekSummariesView weekSummaries={dataService.getWeekSummaries()} />);
 };
 
 export default WeekSummariesContainer;
