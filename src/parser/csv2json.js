@@ -6,9 +6,22 @@ const outputFilePath = "./data/runkeeper.json";
 
 const config = {
   checkType: true,
-  headers: ["id", "dateTime", "type", "route", "distance",
-    "duration", "pace", "speed", "calories", "climb",
-    "heartRate", "friends", "notes", "gpx"],
+  headers: [
+    "id",
+    "dateTime",
+    "type",
+    "route",
+    "distance",
+    "duration",
+    "pace",
+    "speed",
+    "calories",
+    "climb",
+    "heartRate",
+    "friends",
+    "notes",
+    "gpx",
+  ],
   noheader: false,
 };
 
@@ -19,4 +32,3 @@ parser(config)
     // TODO perhaps add 'weekStart' or 'firstWeekDay' or just 'week'?
     fs.writeFileSync(outputFilePath, JSON.stringify(jsonObj));
   });
-

@@ -1,4 +1,4 @@
-import {Day} from "./Day";
+import { Day } from "./Day";
 
 export interface Week {
   startDate: string;

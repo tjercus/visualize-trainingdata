@@ -1,5 +1,5 @@
-import React, {FunctionComponent} from "react";
-import {WeekSummary} from "./model/WeekSummary";
+import React, { FunctionComponent } from "react";
+import { WeekSummary } from "./model/WeekSummary";
 import WeekSummaryView from "./WeekSummaryView";
 
 interface Props {
@@ -8,10 +8,18 @@ interface Props {
 
 // weekSummaries.map(weekSummary => weekSummary.weekStart)
 
-const WeekSummariesView: FunctionComponent<Props> = ({weekSummaries}) => {
+const WeekSummariesView: FunctionComponent<Props> = ({ weekSummaries }) => {
+  // className={"tile is-ancestor"}
   return (
-    <div>{weekSummaries.map(weekSummary => <WeekSummaryView key={weekSummary.startDate} weekSummary={weekSummary} />)}</div>
-  )
+    <section className={"vt-weeksummaries tile is-ancestor"}>
+      {weekSummaries.map((weekSummary) => (
+        <WeekSummaryView
+          key={weekSummary.startDate}
+          weekSummary={weekSummary}
+        />
+      ))}
+    </section>
+  );
 };
 
 export default WeekSummariesView;

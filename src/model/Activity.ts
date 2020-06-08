@@ -1,13 +1,13 @@
 enum HillType {
   NONE,
   MODERATE,
-  STEEP
+  STEEP,
 }
 
 export enum ActivityState {
   COMPLETED,
   PLANNED,
-  SKIPPED
+  SKIPPED,
 }
 
 export enum ActivityType {
@@ -22,7 +22,7 @@ export enum TrainingType {
   LONG,
   MIXED,
   PROGRESSIVE,
-  RECOVERY
+  RECOVERY,
 }
 
 interface Material {

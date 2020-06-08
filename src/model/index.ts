@@ -1,5 +1,4 @@
-
-import * as dataService from "./dataService"
+import * as dataService from "./dataService";
 
 export default dataService;
 // import with:

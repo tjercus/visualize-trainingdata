@@ -1,18 +1,23 @@
-import React, {FunctionComponent} from "react";
+import React, { FunctionComponent } from "react";
 import "./App.css";
 import WeekSummariesContainer from "./WeekSummariesContainer";
 
 const App: FunctionComponent = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        Activity reports
-      </header>
-      <article>
-        List of filters/selection criteria
-        List of reports
+    <div className={"vt-app"}>
+      <section className="hero is-primary">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">Activity reports</h1>
+          </div>
+        </div>
+      </section>
+      <section className={"vt-main"}>
+        <h1 className={"title"}>
+          List of filters/selection criteria List of reports
+        </h1>
         <WeekSummariesContainer />
-      </article>
+      </section>
     </div>
   );
 };

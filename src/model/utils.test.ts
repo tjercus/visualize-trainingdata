@@ -1,14 +1,22 @@
 import {
-  addDays, addDurations,
+  addDays,
+  addDurations,
+  byDateTimeAscending,
   convertDateTimeToDate,
-  convertMapToArray, getActivitiesFromWeek,
-  getSunday, makeAverageDistance, makeTotalDistance, makeTotalDuration,
-  makeWeeks, makeWeekSummary,
+  convertMapToArray,
+  getActivitiesFromWeek,
+  getSunday,
+  makeAverageDistance,
+  makeTotalDistance,
+  makeTotalDuration,
+  makeWeeks,
+  makeWeekSummary,
   newActivity,
   newDay,
-  newWeek, padDuration
+  newWeek,
+  padDuration,
 } from "./utils";
-import {Activity} from "./Activity";
+import { Activity } from "./Activity";
 
 import runkeeperActivities from "../model/data/runkeeper.json";
 
@@ -38,10 +46,10 @@ test("convertDateTimeToDate", () => {
 
 test("makeWeeks", () => {
   const activities: Array<Activity> = [
-    newActivity({id: "one", dateTime: "2020-05-18 10:15:00"}),
-    newActivity({id: "two", dateTime: "2020-05-19 07:12:00"}),
-    newActivity({id: "three", dateTime: "2020-05-19 14:30:00"}),
-    newActivity({id: "four", dateTime: "2020-05-31 06:21:00"}),
+    newActivity({ id: "one", dateTime: "2020-05-18 10:15:00" }),
+    newActivity({ id: "two", dateTime: "2020-05-19 07:12:00" }),
+    newActivity({ id: "three", dateTime: "2020-05-19 14:30:00" }),
+    newActivity({ id: "four", dateTime: "2020-05-31 06:21:00" }),
   ];
   const weeks = makeWeeks(activities);
   expect(weeks.size).toEqual(2);
@@ -92,28 +100,33 @@ test("padDuration", () => {
 });
 
 test("getActivitiesFromWeek", () => {
-  const week = newWeek({startDate: "2020-05-15"});
+  const week = newWeek({ startDate: "2020-05-15" });
   const dayOne = week.days.get("2020-05-15") || newDay();
-  dayOne.activities.set("2020-05-15 10:00:00", newActivity({dateTime: "2020-05-15 10:00:00"}));
+  dayOne.activities.set(
+    "2020-05-15 10:00:00",
+    newActivity({ dateTime: "2020-05-15 10:00:00" })
+  );
   const dayThree = week.days.get("2020-05-17") || newDay();
-  dayThree.activities.set("2020-05-17 15:30:00", newActivity({dateTime: "2020-05-17 15:30"}));
+  dayThree.activities.set(
+    "2020-05-17 15:30:00",
+    newActivity({ dateTime: "2020-05-17 15:30" })
+  );
   const activities = getActivitiesFromWeek(week);
   expect(activities).toBeInstanceOf(Array);
 });
 
 test("makeAverageDistance", () => {
   const activities = [
-    newActivity({distance: 12.2}),
+    newActivity({ distance: 12.2 }),
     newActivity(),
-    newActivity({distance: 6.58})
+    newActivity({ distance: 6.58 }),
   ];
   const average = makeAverageDistance(activities);
   expect(average).toEqual(6.26);
 });
 
 test("addDurations", () => {
-  expect(addDurations("01:10:23", "00:53:12"))
-    .toEqual("02:03:35");
+  expect(addDurations("01:10:23", "00:53:12")).toEqual("02:03:35");
 });
 
 // test("makeAverageDuration", () => {
@@ -126,9 +139,9 @@ test("addDurations", () => {
 
 test("makeTotalDistance", () => {
   const activities = [
-    newActivity({distance: 23.12}),
-    newActivity({distance: 11}),
-    newActivity({distance: 3.3}),
+    newActivity({ distance: 23.12 }),
+    newActivity({ distance: 11 }),
+    newActivity({ distance: 3.3 }),
   ];
   expect(makeTotalDistance()).toEqual(0);
   expect(makeTotalDistance(activities)).toEqual(37.42);
@@ -136,24 +149,38 @@ test("makeTotalDistance", () => {
 
 test("makeTotalDuration", () => {
   const activities = [
-    newActivity({duration: "01:10:23"}),
-    newActivity({duration: "00:53:12"})
+    newActivity({ duration: "01:10:23" }),
+    newActivity({ duration: "00:53:12" }),
   ];
   expect(makeTotalDuration(activities)).toEqual("02:03:35");
   const moreActivities = [
-    newActivity({duration: "52:10"}),
-    newActivity({duration: "01:01:01"})
+    newActivity({ duration: "52:10" }),
+    newActivity({ duration: "01:01:01" }),
   ];
   expect(makeTotalDuration(moreActivities)).toEqual("01:53:11");
   const evenMoreActivities = [
-    newActivity({duration: "52:10"}),
-    newActivity({duration: "1:01:01"})
+    newActivity({ duration: "52:10" }),
+    newActivity({ duration: "1:01:01" }),
   ];
   expect(makeTotalDuration(evenMoreActivities)).toEqual("01:53:11");
 });
 
-test("makeWeekSummary", () => {
+test("byDateTimeAscending", () => {
+  const activities = [
+    newActivity({ dateTime: "1976-05-15" }),
+    newActivity({ dateTime: "1976-05-21" }),
+    newActivity({ dateTime: "1976-05-18" }),
+  ];
+  const sortedActivities = activities.sort(byDateTimeAscending);
+  expect(sortedActivities[0].dateTime).toEqual("1976-05-15");
+  expect(sortedActivities[1].dateTime).toEqual("1976-05-18");
+  expect(sortedActivities[2].dateTime).toEqual("1976-05-21");
+});
+
+///////////////////// temp /////////////////////
+
+test.skip("makeWeekSummary", () => {
   console.log(runkeeperActivities);
   const weeks = makeWeeks(runkeeperActivities);
-  convertMapToArray(weeks).map(week => console.log(makeWeekSummary(week)));
+  convertMapToArray(weeks).map((week) => console.log(makeWeekSummary(week)));
 });
