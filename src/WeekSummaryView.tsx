@@ -21,9 +21,9 @@ const WeekSummaryView: FunctionComponent<Props> = ({ weekSummary }) => {
             <dd>{weekSummary.duration}</dd>
             <dt>Activities</dt>
             <dd>{weekSummary.nrOfActivities}</dd>
-            <dt>avg-dist.</dt>
+            <dt>avg-dist</dt>
             <dd>{weekSummary.averageDistance}</dd>
-            <dt>avg-dur.</dt>
+            <dt>avg-dur</dt>
             <dd>{weekSummary.averageDuration}</dd>
           </dl>
         </div>

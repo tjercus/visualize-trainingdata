@@ -33,8 +33,8 @@ interface Material {
 
 export interface Activity {
   dateTime: string;
-  distance?: number;
-  duration?: string;
+  distance: number;
+  duration: string;
   hills?: HillType;
   id: string;
   material?: Material;
@@ -42,5 +42,4 @@ export interface Activity {
   RPE?: number;
   state: ActivityState;
   type: ActivityType;
-  weekNr?: number;
 }

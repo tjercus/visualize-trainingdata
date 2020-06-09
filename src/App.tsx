@@ -13,9 +13,6 @@ const App: FunctionComponent = () => {
         </div>
       </section>
       <section className={"vt-main"}>
-        <h1 className={"title"}>
-          List of filters/selection criteria List of reports
-        </h1>
         <WeekSummariesContainer />
       </section>
     </div>

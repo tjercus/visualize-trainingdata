@@ -2,6 +2,7 @@ import {
   addDays,
   addDurations,
   byDateTimeAscending,
+  byDistanceDescending,
   convertDateTimeToDate,
   convertMapToArray,
   getActivitiesFromWeek,
@@ -19,6 +20,7 @@ import {
 import { Activity } from "./Activity";
 
 import runkeeperActivities from "../model/data/runkeeper.json";
+import { WeekSummary } from "./WeekSummary";
 
 // 23 may = zaterdag. It's sunday was 17 may
 // 24 may = zondag.   It's sunday was 24 may
@@ -175,6 +177,39 @@ test("byDateTimeAscending", () => {
   expect(sortedActivities[0].dateTime).toEqual("1976-05-15");
   expect(sortedActivities[1].dateTime).toEqual("1976-05-18");
   expect(sortedActivities[2].dateTime).toEqual("1976-05-21");
+});
+
+test("byDistanceDescending", () => {
+  const weekSummaries: Array<WeekSummary> = [
+    {
+      distance: 12,
+      duration: "12:12:10",
+      startDate: "2020-03-12",
+      nrOfActivities: 2,
+      averageDuration: "0",
+      averageDistance: 1,
+    },
+    {
+      distance: 22.32,
+      duration: "12:12:10",
+      startDate: "2020-05-09",
+      nrOfActivities: 2,
+      averageDuration: "0",
+      averageDistance: 1,
+    },
+    {
+      distance: 17.9,
+      duration: "12:12:10",
+      startDate: "2020-04-23",
+      nrOfActivities: 2,
+      averageDuration: "0",
+      averageDistance: 1,
+    },
+  ];
+  const sortedWeekSummaries = weekSummaries.sort(byDistanceDescending);
+  expect(sortedWeekSummaries[0].distance).toEqual(22.32);
+  expect(sortedWeekSummaries[1].distance).toEqual(17.9);
+  expect(sortedWeekSummaries[2].distance).toEqual(12);
 });
 
 ///////////////////// temp /////////////////////
